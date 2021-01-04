@@ -1,0 +1,73 @@
+/*
+ * Bai5.c
+ *
+ * Created: 10/23/2020 9:32:34 AM
+ * Author: Dell
+ */
+
+#include <io.h>
+#include <alcd.h>
+#include <delay.h>
+#include <stdio.h>
+
+#define led PORTE.5
+#define CT1 PIND.3
+#define CT2 PIND.5
+#define CT3 PIND.2
+#define sang 0
+#define toi 1
+
+int count = 0;
+unsigned char buff[10]; 
+
+void main(void)
+{
+DDRD = 0x00;
+DDRE = 0x20;
+PORTE = 0x20;
+PORTD = 0xFF;
+lcd_init(16); 
+lcd_clear();
+while (1)
+    {
+    // Please write your application code here  
+      
+    if (CT1 == 0)
+        {             
+           while (1)
+           {
+                if (CT2 == 0)
+                {
+                    count++;   
+                    delay_ms(250);
+                    break;
+                }
+           } 
+        }       
+    if (CT2 == 0)
+        {
+            while (1)
+            {
+                if (CT1 == 0)
+                {
+                    count--;
+                    delay_ms(250);
+                    break;
+                }
+           }        
+            
+        }                     
+    if (count <= 0)
+    {
+        count = 0
+        led = toi;
+    }
+    else
+        led = sang;
+    
+    lcd_gotoxy(0, 0);
+    sprintf(buff, "%d", count);
+    lcd_puts(buff);        
+      
+    }
+}

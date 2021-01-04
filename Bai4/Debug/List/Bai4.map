@@ -1,0 +1,33 @@
+RAM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+_base_y                                                                           0x050C       4
+_lcd_maxx                                                                         0x0510       1
+
+EEPROM Allocation [bytes]
+Variable                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+
+Register Allocation
+Variable                                                                          Register  Size
+------------------------------------------------------------------------------------------------
+mode                                                                              R5           1
+x                                                                                 R4           1
+y                                                                                 R7           1
+len                                                                               R6           1
+i                                                                                 R9           1
+j                                                                                 R8           1
+message                                                                           R10,R11      2
+_lcd_x                                                                            R13          1
+_lcd_y                                                                            R12          1
+
+FLASH Allocation [words]
+Function                                                                          Address   Size
+------------------------------------------------------------------------------------------------
+main                                                                              0x0008B    100
+_lcd_write_nibble_G100                                                            0x000EF     37
+_lcd_write_data                                                                   0x00114     12
+lcd_gotoxy                                                                        0x00120     13
+lcd_clear                                                                         0x0012D     10
+lcd_putchar                                                                       0x00137     22
+lcd_init                                                                          0x0014D     45

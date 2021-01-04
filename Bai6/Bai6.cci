@@ -1,0 +1,13 @@
+VERSION:3 SOURCE_TIMESTAMP:515E55E3
+NODE:I LEVEL:0 LINE:9 "D:\Workspace\Study\Kien truc may tinh\robotic\Code_vision\inc\io.h"
+NODE:I LEVEL:0 LINE:10 "D:\Workspace\Study\Kien truc may tinh\robotic\Code_vision\inc\glcd.h"
+NODE:I LEVEL:0 LINE:11 "D:\Workspace\Study\Kien truc may tinh\robotic\Code_vision\inc\delay.h"
+NODE:I LEVEL:0 LINE:12 "D:\Workspace\Study\Kien truc may tinh\robotic\Code_vision\inc\font5x7.h"
+NODE:I LEVEL:0 LINE:13 "D:\Workspace\Study\Kien truc may tinh\robotic\Code_vision\inc\stdio.h"
+NODE:M LEVEL:0 LINE:14 "LEG_G"
+NODE:V LEVEL:0 LINE:16 "gia_tri_adc -> R4,R5"
+NODE:V LEVEL:0 LINE:16 "i -> R6,R7"
+NODE:V LEVEL:0 LINE:17 "buffer -> RAM:????"
+NODE:M LEVEL:0 LINE:19 "ADC_VREF_TYPE"
+NODE:F LEVEL:0 LINE:22 "read_adc(unsigned char adc_input)"
+NODE:F LEVEL:0 LINE:35 "main(void)"

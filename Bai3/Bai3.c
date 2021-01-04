@@ -1,0 +1,86 @@
+/*
+ * Bai3.c
+ *
+ * Created: 10/9/2020 2:11:02 AM
+ * Author: Dell     
+ * Viet chuong trinh bam cong tac 1 lan 1 thi den sang, lan 2 thi den tat, lan 3 thi den sang, lan 4 thi den tat ...   
+ * Bam ct 1 den sang, bam ct 2 den tat, bam ct 3 den nhap nhay theo chu ky 1s
+ * Su dung bien dem dang unsigned char, cho den sang 1p
+ */
+
+#include <io.h>
+#include <delay.h>
+#define led PORTE.5
+#define CT1 PIND.3
+#define CT2 PIND.5
+#define CT3 PIND.2
+#define sang 0
+#define toi 1
+unsigned char x = 0;
+unsigned char dem_1, dem_2;
+interrupt [TIM0_OVF] void timer0_ovf_isr(void)
+{
+// Reinitialize Timer 0 value
+TCNT0=0x06;
+if (x == 1)
+{
+    dem_1++;
+    if (dem_1 == 255)
+    {
+        dem_2++; 
+        dem_1 = 0;
+        if (dem_2 == 255)
+        {
+            dem_2 = 0;          
+        }
+    }
+        
+    if (dem_1 == 75 && dem_2 == 235)
+    {
+        led = ~led;
+        dem_1 = 0;
+        dem_2 = 0;
+    }
+}
+// Place your code here
+
+}
+
+void main(void)
+{
+DDRD = 0x00;
+DDRE = 0x20;
+PORTE = 0x20; // Den tat
+PORTD = 0xFF; // Pull up ca PORT D len nguon
+// Thong thuong voi loi vao la nut bam, nguoi ta se ket noi de khi bam, bus se duoc noi xuong GND
+
+ASSR=0<<AS0;
+TCCR0=(0<<WGM00) | (0<<COM01) | (0<<COM00) | (0<<WGM01) | (0<<CS02) | (1<<CS01) | (1<<CS00);
+TCNT0=0x06;
+OCR0=0x00;
+TIMSK=(0<<OCIE2) | (0<<TOIE2) | (0<<TICIE1) | (0<<OCIE1A) | (0<<OCIE1B) | (0<<TOIE1) | (0<<OCIE0) | (1<<TOIE0);
+ETIMSK=(0<<TICIE3) | (0<<OCIE3A) | (0<<OCIE3B) | (0<<TOIE3) | (0<<OCIE3C) | (0<<OCIE1C);
+#asm("sei")
+
+    while (1)
+    {
+        if (CT1 == 0)
+        {    
+            delay_ms(250);
+            led = sang;        
+            x = 0;
+        }
+        else if (CT2 == 0)
+        {
+            delay_ms(250);   
+            led = toi;
+            x = 0;
+        }
+        else if (CT3 == 0)
+        {        
+            delay_ms(250);
+            x = 1;
+        }
+    }
+}
+

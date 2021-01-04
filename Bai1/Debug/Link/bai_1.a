@@ -1,0 +1,87 @@
+;/*
+; * bai_1.c
+; *
+; * Created: 9/25/2020 9:43:30 AM
+; * Author: Dell
+; */
+;// viet chuong trinh dieu khien den led tren board mach
+;
+;/*
+;Den LED duoc ket noi vao PE5 (Port E bit 5)
+;De dieu khien duoc den LED thi du lieu phai di tu MCU ra LED (OUTPUT)
+;Tuy thuoc vao ket noi LED voi MCU la loai nao ma logic xuat ra de dieu khien tuong ung la 0 hoac 1 de bat den
+;    Neu noi loai K thi LED sang khi logic xuat ra = 0
+;    Neu noi loai A thi LED sang khi logic xuat ra = 1
+;    Trong mach dien duoc ket noi theo dang K
+;*/
+;
+;/*
+;Trong AVR co 3 thanh ghi tac dong vao tung port
+;    DDR = Data DiRection = thanh ghi chi huong du lieu
+;        DDR = 1 Du lieu duoc dieu khien theo huong di tu MCU - DV/ (Output)
+;        DDR = 0 Du lieu duoc dieu khien nhan tu device vao MCU (Input)
+;    PORT Thanh ghi du lieu
+;        PORT = 1 + Output = Ghi logic 1 o loi ra (nghia la noi ra voi VCC = 5V, 3.3V...)
+;        PORT = 1 + Input thi loi vao duoc PULL UP (treo len VCC)
+;        PORT = 0 thi ghi logic 0 o loi ra (nghia la noi loi ra voi GND = 0V)
+;    PIN Thanh ghi doc du lieu
+;*/
+;
+;/* De PE5 la loi ra chung ta phai tac dong vao DDR
+;    DDRE.5 = 1;
+;    Vi led noi theo kieu K nen muon LED sang, chung ta phai xuat logic 0V = GND
+;    PORTE.5 = 0;
+;*/
+;#include <io.h>
+;PCODE: $00000000 VOL: 0
+	#ifndef __SLEEP_DEFINED__
+;PCODE: $00000001 VOL: 0
+	#define __SLEEP_DEFINED__
+;PCODE: $00000002 VOL: 0
+	.EQU __se_bit=0x20
+;PCODE: $00000003 VOL: 0
+	.EQU __sm_mask=0x1C
+;PCODE: $00000004 VOL: 0
+	.EQU __sm_powerdown=0x10
+;PCODE: $00000005 VOL: 0
+	.EQU __sm_powersave=0x18
+;PCODE: $00000006 VOL: 0
+	.EQU __sm_standby=0x14
+;PCODE: $00000007 VOL: 0
+	.EQU __sm_ext_standby=0x1C
+;PCODE: $00000008 VOL: 0
+	.EQU __sm_adc_noise_red=0x08
+;PCODE: $00000009 VOL: 0
+	.SET power_ctrl_reg=mcucr
+;PCODE: $0000000A VOL: 0
+	#endif
+;PCODE: $0000000B VOL: 0
+;PCODE: $0000000C VOL: 0
+;
+;/* bien toan cuc */ // Chu y khai bao thong minh, tiet kiem RAM
+;
+;void main(void)
+; 0000 0028 {
+
+	.CSEG
+;PCODE: $0000000D VOL: 0
+; 0000 0029 //DDRE.5 = 1; // Day la cach viet tac dong truc tiep vao bit
+; 0000 002A //DDRE = 0b0010 0000 ; // Cach viet nhi phan
+; 0000 002B DDRE = 0x20; // Cach viet hex
+;PCODE: $0000000E VOL: 0
+;PCODE: $0000000F VOL: 0
+; 0000 002C PORTE = 0x20;
+;PCODE: $00000010 VOL: 0
+;PCODE: $00000011 VOL: 0
+; 0000 002D while (1)
+;PCODE: $00000012 VOL: 0
+; 0000 002E     {
+; 0000 002F         // PORTE.5 = 0;
+; 0000 0030     }
+;PCODE: $00000013 VOL: 0
+;PCODE: $00000014 VOL: 0
+; 0000 0031 }
+;PCODE: $00000015 VOL: 0
+;PCODE: $00000016 VOL: 0
+;PCODE: $00000017 VOL: 0
+;
